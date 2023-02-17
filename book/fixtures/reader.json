@@ -1,0 +1,72 @@
+[
+  {
+    "model": "book.reader",
+    "pk": 1,
+    "fields": {
+      "first_name": "Александр",
+      "middle_name": "Сергеевич",
+      "last_name": "Белов",
+      "phone_number": "+79093456787",
+      "is_active": true,
+      "borrowed_books": [],
+      "created": "2022-02-03 12:10:16.332479+03:00",
+      "updated": "2022-02-04 12:10:16.332479+03:00"
+    }
+  },
+  {
+    "model": "book.reader",
+    "pk": 2,
+    "fields": {
+      "first_name": "Алексей",
+      "middle_name": "Сергеевич",
+      "last_name": "Сергеев",
+      "phone_number": "+79093456789",
+      "is_active": true,
+      "borrowed_books": [],
+      "created": "2022-02-03 12:10:16.332479+03:00",
+      "updated": "2022-02-04 12:10:16.332479+03:00"
+    }
+  },
+  {
+    "model": "book.reader",
+    "pk": 3,
+    "fields": {
+      "first_name": "Вадим",
+      "middle_name": "Сергеевич",
+      "last_name": "Слепец",
+      "phone_number": "+79093456487",
+      "is_active": true,
+      "borrowed_books": [],
+      "created": "2022-02-03 12:10:16.332479+03:00",
+      "updated": "2022-02-04 12:10:16.332479+03:00"
+    }
+  },
+  {
+    "model": "book.reader",
+    "pk": 4,
+    "fields": {
+      "first_name": "Леонид",
+      "middle_name": "Сергеевич",
+      "last_name": "Ильичев",
+      "phone_number": "+79073456787",
+      "is_active": true,
+      "borrowed_books": [],
+      "created": "2022-02-03 12:10:16.332479+03:00",
+      "updated": "2022-02-04 12:10:16.332479+03:00"
+    }
+  },
+  {
+    "model": "book.reader",
+    "pk": 5,
+    "fields": {
+      "first_name": "Евгения",
+      "middle_name": "Сергеевич",
+      "last_name": "Волконская",
+      "phone_number": "+79143456787",
+      "is_active": true,
+      "borrowed_books": [],
+      "created": "2022-02-03 12:10:16.332479+03:00",
+      "updated": "2022-02-04 12:10:16.332479+03:00"
+    }
+  }
+]

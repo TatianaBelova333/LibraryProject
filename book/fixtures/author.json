@@ -1,0 +1,74 @@
+[
+  {
+    "model": "book.author",
+    "pk": 1,
+    "fields": {
+      "first_name": "Александр",
+      "middle_name": "Сергеевич",
+      "last_name": "Пушкин",
+      "photo": null,
+      "created": "2022-02-03 12:10:16.332479+03:00",
+      "updated": "2022-02-04 12:10:16.332479+03:00"
+    }
+  },
+  {
+    "model": "book.author",
+    "pk": 2,
+    "fields": {
+      "first_name": "Михаил",
+      "middle_name": "Юрьевич",
+      "last_name": "Лермонтов",
+      "photo": null,
+      "created": "2022-03-03 12:10:16.332479+03:00",
+      "updated": "2022-05-04 12:10:16.332479+03:00"
+    }
+  },
+  {
+    "model": "book.author",
+    "pk": 3,
+    "fields": {
+      "first_name": "Лев",
+      "middle_name": "Николаевич",
+      "last_name": "Толстой",
+      "photo": null,
+      "created": "2022-02-03 12:10:16.332479+03:00",
+      "updated": "2022-02-04 12:10:16.332479+03:00"
+    }
+  },
+  {
+    "model": "book.author",
+    "pk": 4,
+    "fields": {
+      "first_name": "Антон",
+      "middle_name": "Павлович",
+      "last_name": "Чехов",
+      "photo": null,
+      "created": "2022-02-04 13:10:16.332479+03:00",
+      "updated": "2022-02-05 12:10:16.332479+03:00"
+    }
+  },
+  {
+    "model": "book.author",
+    "pk": 5,
+    "fields": {
+      "first_name": "Николай",
+      "middle_name": "Васильевич",
+      "last_name": "Гоголь",
+      "photo": null,
+      "created": "2022-06-03 12:10:16.332479+03:00",
+      "updated": "2022-07-04 12:10:16.332479+03:00"
+    }
+  },
+  {
+    "model": "book.author",
+    "pk": 6,
+    "fields": {
+      "first_name": "Михаил",
+      "middle_name": "Афанасьевич",
+      "last_name": "Булгаков",
+      "photo": null,
+      "created": "2022-02-06 12:10:16.332479+03:00",
+      "updated": "2022-02-08 12:10:16.332479+03:00"
+    }
+  }
+]
