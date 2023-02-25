@@ -79,6 +79,7 @@ class Book(DatesModelMixin):
     )
 
     class Meta:
+        unique_together = ('title', 'author')
         verbose_name = 'Книга'
         verbose_name_plural = 'Книги'
         ordering = ('title', 'author__last_name')
