@@ -3,6 +3,7 @@ from django.db.models import Case, Value, When, F
 from django.urls import reverse
 from django.utils.html import format_html, urlencode
 
+from book.forms import ReaderForm
 from book.models import Author, Book, Reader
 
 
@@ -15,6 +16,7 @@ class ReaderAdmin(admin.ModelAdmin):
     )
     list_filter = ('is_active',)
     actions = ('change_status', 'remove_borrowed_books')
+    form = ReaderForm
 
     @admin.action(description='Изменить статус читателя')
     def change_status(self, request, queryset):
@@ -43,11 +45,16 @@ class BookAdmin(admin.ModelAdmin):
         'amount',
     )
     list_display_links = ('title',)
+    actions = ('change_amount_to_zero',)
 
     def author_link(self, obj):
         author = obj.author
         url = reverse('admin:book_author_changelist') + str(author.id)
         return format_html(f'<a href="{url}">{author}</a>')
+
+    @admin.action(description='Обнулить количество')
+    def change_amount_to_zero(self, request, queryset):
+        queryset.update(amount=0)
 
 
 admin.site.register(Author, AuthorAdmin)
