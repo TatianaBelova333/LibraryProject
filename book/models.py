@@ -105,3 +105,8 @@ class Reader(Person, DatesModelMixin):
 
     def __str__(self) -> str:
         return self.full_name
+
+    def display_borrowed_books(self):
+        return '; '.join([str(book) for book in self.borrowed_books.all()])
+
+    display_borrowed_books.short_description = 'Книги на руках'
