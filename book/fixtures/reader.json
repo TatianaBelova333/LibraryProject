@@ -5,9 +5,11 @@
     "fields": {
       "first_name": "Александр",
       "middle_name": "Сергеевич",
+      "username": "sasha",
       "last_name": "Белов",
       "phone_number": "+79093456787",
       "is_active": true,
+      "is_staff": false,
       "borrowed_books": [],
       "created": "2022-02-03 12:10:16.332479+03:00",
       "updated": "2022-02-04 12:10:16.332479+03:00"
@@ -20,8 +22,10 @@
       "first_name": "Алексей",
       "middle_name": "Сергеевич",
       "last_name": "Сергеев",
+      "username": "aleksey",
       "phone_number": "+79093456789",
       "is_active": true,
+      "is_staff": false,
       "borrowed_books": [],
       "created": "2022-02-03 12:10:16.332479+03:00",
       "updated": "2022-02-04 12:10:16.332479+03:00"
@@ -34,8 +38,10 @@
       "first_name": "Вадим",
       "middle_name": "Сергеевич",
       "last_name": "Слепец",
+      "username": "vadim",
       "phone_number": "+79093456487",
       "is_active": true,
+      "is_staff": true,
       "borrowed_books": [],
       "created": "2022-02-03 12:10:16.332479+03:00",
       "updated": "2022-02-04 12:10:16.332479+03:00"
@@ -48,8 +54,10 @@
       "first_name": "Леонид",
       "middle_name": "Сергеевич",
       "last_name": "Ильичев",
+      "username": "lenya",
       "phone_number": "+79073456787",
       "is_active": true,
+      "is_staff": false,
       "borrowed_books": [],
       "created": "2022-02-03 12:10:16.332479+03:00",
       "updated": "2022-02-04 12:10:16.332479+03:00"
@@ -62,8 +70,10 @@
       "first_name": "Евгения",
       "middle_name": "Сергеевич",
       "last_name": "Волконская",
+      "username": "zheka",
       "phone_number": "+79143456787",
       "is_active": true,
+      "is_staff": false,
       "borrowed_books": [],
       "created": "2022-02-03 12:10:16.332479+03:00",
       "updated": "2022-02-04 12:10:16.332479+03:00"

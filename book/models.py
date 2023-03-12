@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AbstractUser
 from django.core.validators import MinValueValidator
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
@@ -88,8 +89,10 @@ class Book(DatesModelMixin):
         return f'{self.title}, {self.author}'
 
 
-class Reader(Person, DatesModelMixin):
+class Reader(AbstractUser, Person, DatesModelMixin):
     """Library reader model."""
+    REQUIRED_FIELDS = ['first_name', 'last_name', "phone_number", "password"]
+
     phone_number = PhoneNumberField(unique=True, verbose_name='Номер телефона')
     is_active = models.BooleanField(default=True, verbose_name='Статус читателя')
     borrowed_books = models.ManyToManyField(

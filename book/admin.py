@@ -9,10 +9,12 @@ from book.models import Author, Book, Reader
 
 class ReaderAdmin(admin.ModelAdmin):
     list_display = (
+        'username',
         'full_name',
         'phone_number',
         'is_active',
         'display_borrowed_books',
+        'is_staff',
     )
     list_filter = ('is_active',)
     actions = ('change_status', 'remove_borrowed_books')

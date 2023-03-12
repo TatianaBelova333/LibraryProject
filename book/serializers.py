@@ -50,7 +50,15 @@ class ReaderDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reader
         read_only_fields = ["id", "created", "updated"]
-        fields = ('id', 'name', 'phone_number', 'is_active', 'borrowed_books')
+        fields = (
+            'id',
+            'username',
+            'name',
+            'phone_number',
+            'is_active',
+            'is_staff',
+            'borrowed_books',
+        )
 
 
 class ReaderCreateSerializer(serializers.ModelSerializer):
@@ -63,8 +71,16 @@ class ReaderCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Reader
-        read_only_fields = ["id", "created", "updated"]
-        fields = '__all__'
+        read_only_fields = ["created", "updated"]
+        fields = (
+            'username',
+            'first_name',
+            'last_name',
+            'phone_number',
+            'is_active',
+            'password',
+            'borrowed_books',
+    )
 
     def validate_borrowed_books(self, value):
         max_book_count = 3
@@ -78,6 +94,7 @@ class ReaderCreateSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         borrowed_books = validated_data.pop('borrowed_books')
         reader = Reader.objects.create(**validated_data)
+        reader.set_password(validated_data["password"])
         for book in borrowed_books:
             reader.borrowed_books.add(book)
             book = Book.objects.get(pk=book.pk)
@@ -98,7 +115,7 @@ class ReaderUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reader
         read_only_fields = ["id", "created", "updated"]
-        fields = '__all__'
+        exclude = ('email', 'date_joined', 'last_login', 'groups', 'user_permissions')
 
     def validate_borrowed_books(self, value):
         max_book_count = 3
@@ -127,4 +144,5 @@ class ReaderUpdateSerializer(serializers.ModelSerializer):
                 book.amount += 1
                 book.save()
         instance.save()
+        super().update(instance, validated_data)
         return instance
