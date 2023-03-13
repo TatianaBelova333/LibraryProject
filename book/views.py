@@ -10,9 +10,9 @@ from book.serializers import (BookDetailSerializer, BookCreateSerializer, Author
 class IsAdminOrReader(permissions.BasePermission):
 
     def has_object_permission(self, request, view, obj):
-        if not request.user.is_staff and obj != request.user:
-            return False
-        return True
+        if request.user.is_staff or obj == request.user:
+            return True
+        return False
 
 
 class AuthorViewSet(viewsets.ModelViewSet):
@@ -25,7 +25,8 @@ class AuthorViewSet(viewsets.ModelViewSet):
 
     def get_permissions(self):
         """Instantiates and returns the list of permissions that this view requires."""
-        if self.action == 'retrieve':
+
+        if self.action in ('retrieve', 'list'):
             permission_classes = [AllowAny]
         else:
             permission_classes = [IsAdminUser]
@@ -50,7 +51,7 @@ class BookViewSet(viewsets.ModelViewSet):
 
     def get_permissions(self):
         """Instantiates and returns the list of permissions that this view requires."""
-        if self.action == 'retrieve':
+        if self.action in ('retrieve', 'list'):
             permission_classes = [AllowAny]
         else:
             permission_classes = [IsAdminUser]
@@ -75,12 +76,12 @@ class ReaderViewSet(viewsets.ModelViewSet):
 
     def get_permissions(self):
         """Instantiates and returns the list of permissions that this view requires."""
-        if self.action in ('retrieve', 'create'):
+        if self.action == 'create':
             permission_classes = [AllowAny]
-        elif self.action in ('update', 'destroy', 'partial_update'):
+        elif self.action in ('update', 'destroy', 'partial_update', 'retrieve', 'list'):
             permission_classes = [IsAuthenticated, IsAdminOrReader]
         else:
-            permission_classes = [IsAuthenticatedOrReadOnly]
+            permission_classes = [IsAuthenticated]
         return [permission() for permission in permission_classes]
 
     def get_serializer_class(self):

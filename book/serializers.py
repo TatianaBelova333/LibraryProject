@@ -62,6 +62,7 @@ class ReaderDetailSerializer(serializers.ModelSerializer):
 
 
 class ReaderCreateSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True, required=True)
     borrowed_books = serializers.SlugRelatedField(
         required=False,
         slug_field='title',
@@ -92,14 +93,15 @@ class ReaderCreateSerializer(serializers.ModelSerializer):
         return value
 
     def create(self, validated_data):
-        borrowed_books = validated_data.pop('borrowed_books')
+        borrowed_books = validated_data.pop('borrowed_books', None)
         reader = Reader.objects.create(**validated_data)
         reader.set_password(validated_data["password"])
-        for book in borrowed_books:
-            reader.borrowed_books.add(book)
-            book = Book.objects.get(pk=book.pk)
-            book.amount -= 1
-            book.save()
+        if borrowed_books:
+            for book in borrowed_books:
+                reader.borrowed_books.add(book)
+                book = Book.objects.get(pk=book.pk)
+                book.amount -= 1
+                book.save()
         reader.save()
         return reader
 
@@ -111,6 +113,7 @@ class ReaderUpdateSerializer(serializers.ModelSerializer):
         many=True,
         queryset=Book.objects.all(),
     )
+    password = serializers.CharField(write_only=True, required=True)
 
     class Meta:
         model = Reader
@@ -127,22 +130,27 @@ class ReaderUpdateSerializer(serializers.ModelSerializer):
         return value
 
     def update(self, instance, validated_data):
-        books_wanted = set(validated_data.pop('borrowed_books'))
-        previously_borrowed_books = set(instance.borrowed_books.all())
-        new_books = books_wanted.difference(previously_borrowed_books)
-        returned_books = previously_borrowed_books.difference(books_wanted)
-        if new_books:
-            for book in new_books:
-                instance.borrowed_books.add(book)
-                book = Book.objects.get(pk=book.pk)
-                book.amount -= 1
-                book.save()
-        if returned_books:
-            for book in returned_books:
-                instance.borrowed_books.remove(book)
-                book = Book.objects.get(pk=book.pk)
-                book.amount += 1
-                book.save()
-        instance.save()
+        books_wanted = validated_data.pop('borrowed_books', None)
+        password = validated_data.pop('password', None)
+        if password:
+            instance.set_password(password)
+        if books_wanted:
+            books_wanted = set(books_wanted)
+            previously_borrowed_books = set(instance.borrowed_books.all())
+            new_books = books_wanted.difference(previously_borrowed_books)
+            returned_books = previously_borrowed_books.difference(books_wanted)
+            if new_books:
+                for book in new_books:
+                    instance.borrowed_books.add(book)
+                    book = Book.objects.get(pk=book.pk)
+                    book.amount -= 1
+                    book.save()
+            if returned_books:
+                for book in returned_books:
+                    instance.borrowed_books.remove(book)
+                    book = Book.objects.get(pk=book.pk)
+                    book.amount += 1
+                    book.save()
+            instance.save()
         super().update(instance, validated_data)
         return instance
